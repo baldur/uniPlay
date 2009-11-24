@@ -1,3 +1,6 @@
 This is an attempt to unify various video players apis
 
+Clone this and to test the code needs to be served from a "web server" it will
+not work to simply open the index.html with your browser as the flash player
+will not allow the video to play.
 
