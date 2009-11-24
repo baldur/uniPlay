@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title></title>
+    <link href="/stylesheets/reset-fonts-grids.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body class='uniPlay'>
+      <div>load player: 
+          <a href='#vimeo'    class='examples vimeo'>Vimeo</a>
+          <a href='#youtube'  class='examples youtube'>YouTube</a>
+          <a href='#jwplayer' class='examples jwplayer'>JWPlayer</a>
+      </div>
+    <div id="wrapper">
+        <div id="asset_container"></div>
+    </div>
+    <div id="play">Play</div>
+    <hr />
+    <ul>
+        <li>current postion: <span id="currentPosition"></span></lid>
+        <li>current state: <span id="currentState"></span></lid>
+    </ul>
+  </body>
+  <!--[if IE]>
+    <script src="/javascripts/firebug-lite-compressed.js" type="text/javascript"></script>
+  <![endif]-->
+  <script src="/javascripts/jquery.js" type="text/javascript"></script>
+  <script src="/javascripts/swfobject.js" type="text/javascript"></script>
+  <script src="/javascripts/uniPlay.js" type="text/javascript"></script>
+  <script src="/javascripts/uniPlay/Modules/JWPlayer.js" type="text/javascript"></script>
+  <script src="/javascripts/uniPlay/Modules/Vimeo.js" type="text/javascript"></script>
+  <script src="/javascripts/uniPlay/Modules/YouTube.js" type="text/javascript"></script>
+  <script type="text/javascript">
+     UniPlay.examples = {
+       vimeo :  { 
+                 "video_id": "4156357",
+                 "player": "Vimeo"
+                },
+       youtube : { 
+                 "video_id": "BWXo3ctvGXI",
+                 "player": "YouTube"
+                },
+       jwplayer : {
+                 "video_id": "video_two.mp4",
+                 "player": "JWPlayer"
+                }
+
+     }
+     $(document).ready(function () {
+        $('#play').click( function(e) {
+            UniPlay[UniPlay.Player.name].play();
+        });
+        $('.examples').click(function(e) {
+            if(UniPlay[UniPlay.Player.name]) {
+                UniPlay[UniPlay.Player.name].unload();
+            }   
+            var attr = $(e.target).attr('class').split(' ');
+            UniPlay[UniPlay.Player.name] = UniPlay.Player.init(UniPlay[attr[0]][attr[1]]);
+            UniPlay[UniPlay.Player.name].register('currentPosition',$('#currentPosition')); 
+            UniPlay[UniPlay.Player.name].register('currentState',$('#currentState')); 
+        });
+
+        // initialize if something was selected
+        var picked = location.hash;
+        if(picked) {
+            console.log(picked);
+            $('.'+picked.substring(1,picked.length)+':first').trigger('click');
+        } else {
+            $('.examples:first').trigger('click');
+        }
+     });
+
+  </script>
+</html>
+
