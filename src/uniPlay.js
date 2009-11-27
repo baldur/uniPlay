@@ -27,20 +27,34 @@ Number.prototype.zeroPad = function(){
     return myNumber;
 }
 
-Number.prototype.timer = function(){
-    var ret;
+Number.prototype.secondsToTimer = function() {
     var remainingSeconds = (this % 60);
     var remainingMinutes = Math.floor(this / 60);
     var remainingHours   = Math.floor(remainingMinutes / 60);
     var remainingMinutes = remainingMinutes % 60;
     var remainingDays    = Math.floor(remainingHours / 24);
     var remainingHours   = remainingHours % 24;
-    ret = remainingMinutes.zeroPad() + ":" + remainingSeconds.zeroPad();
+
+    var ret = remainingMinutes.zeroPad() + ":" + remainingSeconds.zeroPad();
+
     if(this >= 1 * 60 * 60 * 24) { 
         ret = remainingDays.zeroPad() + ":" + remainingHours.zeroPad() + ":" + ret;
     } else if(this >= 1 * 60 * 60) {
         ret = remainingHours.zeroPad() + ":" + ret;
     } else {
+    }
+    return ret;
+}
+
+String.prototype.timerToSeconds = function() {
+    if(!/^(\d{2}:?){1,4}$/.test(this)) {
+        throw("bad input");
+    }
+    var numbers = this.split(":");
+    var factor = [1, 60, 60*60, 60*60*24]
+    var ret = 0;
+    while(numbers.length > 0){
+         ret += parseInt(numbers.pop(), 10) * factor.shift();
     }
     return ret;
 }
