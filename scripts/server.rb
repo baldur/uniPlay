@@ -13,6 +13,16 @@ get '/src/uniPlay/Modules/:name' do
   send_file file, :type => 'text/javascript'
 end
 
+get '/screw-unit/lib/:name' do
+  file = File.dirname(__FILE__) + "/../screw-unit/lib/#{params[:name]}"
+  send_file file, :type => 'text/javascript'
+end
+
+get '/screw-unit/example/spec/:name' do
+  file = File.dirname(__FILE__) + "/../screw-unit/example/spec/#{params[:name]}"
+  send_file file, :type => 'text/javascript'
+end
+
 get '/:type/:asset' do
   types = {'javascripts' => 'text/javascript',
            'src' => 'text/javascript',
