@@ -36,14 +36,21 @@ UniPlay.Modules.JWPlayer = function() {
             },
             currentPosition: '',
             currentState: '',
-            unload: function(){
-                $(getDom()).parent().empty().append($('<div id="asset_container">'))
+            getDomElement: function() {
+                return getDom();
+            },
+            individualUnload: function(){
+                console.log("jwplayer unload");
             },
             publicMethod: function() {
             },
             timeMonitor: function(obj) { 
                 if(obj.position) {
                     this.currentPosition = obj.position;
+                }
+                timer = this.timerRegistered;
+                if(timer) {
+                    timer[1][0].innerHTML = this.currentPosition.secondsToTimer();
                 }
                 registered = this.currentPositionRegistered;
                 if(registered) {

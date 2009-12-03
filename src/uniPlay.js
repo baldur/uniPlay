@@ -10,7 +10,21 @@ UniPlay.Player = (function(){
             instance = UniPlay.Modules[doc.player]();
             instance.load(doc);
             instance.register = function(attribute, domEl){
+                if(!this.registry) {
+                    this.registry = [];
+                }
+                var opts = {  attribute: attribute,
+                             domEl: domEl };
+                this.registry.push(opts);
                 this[attribute+"Registered"] = [true, domEl];
+            }
+            instance.unload = function() {
+                this.individualUnload();
+                $.map(this.registry, function(register) {
+                    register.domEl[0].innerHTML = "empty";
+                    this[register.attribute + "Registered"] = false;
+                });
+                $(this.getDomElement()).parent().empty().append($('<div id="asset_container">'))
             }
             // UniPlay.playerInstance is a referance here which 
             // I can rely on internally and/for telling flash 

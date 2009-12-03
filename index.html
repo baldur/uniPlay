@@ -18,6 +18,7 @@
     <div id="play">Play</div>
     <hr />
     <ul>
+        <li>timer: <span id="timer"></span></lid>
         <li>current postion: <span id="currentPosition"></span></lid>
         <li>current state: <span id="currentState"></span></lid>
     </ul>
@@ -59,6 +60,7 @@
             }   
             var attr = $(e.target).attr('class').split(' ');
             YourScope.yourUniPlayer = UniPlay.Player.init(YourScope[attr[0]][attr[1]]);
+            YourScope.yourUniPlayer.register('timer', $('#timer'));
             YourScope.yourUniPlayer.register('currentPosition',$('#currentPosition')); 
             YourScope.yourUniPlayer.register('currentState',$('#currentState')); 
         });

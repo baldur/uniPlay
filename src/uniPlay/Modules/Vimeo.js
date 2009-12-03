@@ -67,13 +67,20 @@ UniPlay.Modules.Vimeo = function() {
             },
             currentPosition: '',
             currentState: '',
-            unload: function(){
-                $(getDom()).parent().empty().append($('<div id="asset_container">'))
+            getDomElement: function() {
+                return getDom();
+            },
+            individualUnload: function(){
+                console.log("vimeo unload");
             },
             publicMethod: function() {
             },
             timeMonitor: function(obj) { 
                 this.currentPosition = obj;
+                timer = this.timerRegistered;
+                if(timer) {
+                    timer[1][0].innerHTML = this.currentPosition.secondsToTimer();
+                }
                 registered = this.currentPositionRegistered;
                 if(registered) {
                     registered[1][0].innerHTML = this.currentPosition;

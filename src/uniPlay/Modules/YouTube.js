@@ -32,8 +32,8 @@ UniPlay.Modules.YouTube = function() {
             },
             onStateChange: function (state) {
                 // key unstarted (-1), ended (0), playing (1), paused (2), buffering (3), video cued (5)
-                var states = ["ENDED", "PLAYING", "PAUSED", "BUFFERING"];
-                this.currentState = states[state];
+                var states = ["ENDED", "PLAYING", "PAUSED", "BUFFERING", "UNSTARTED"];
+                this.currentState = states[state] || states[states.length-state];
                 registered = this.currentStateRegistered;
                 if(registered) {
                     registered[1][0].innerHTML = this.currentState;
@@ -56,13 +56,15 @@ UniPlay.Modules.YouTube = function() {
                 getDom().seekTo(pos, true);
                 getDom().playVideo();
             },
-            currentPosition: '',
             currentState: '',
-            unload: function(){
-                console.log(this);
+            currentPosition: '',
+            getDomElement: function() {
+                return getDom();
+            },
+            individualUnload: function(){
+                console.log("youtube unload");
                 window.onYouTubePlayerReady = undefined;
                 clearInterval(this.timeMonitorId);
-                $(getDom()).parent().empty().append($('<div id="asset_container">'))
             },
             publicMethod: function() {
             },
@@ -70,6 +72,10 @@ UniPlay.Modules.YouTube = function() {
                 var that = this;
                 this.timeMonitorId = setInterval( function() { 
                     that.currentPosition = getDom().getCurrentTime(); 
+                    timer = that.timerRegistered;
+                    if(timer) {
+                        timer[1][0].innerHTML = that.currentPosition.secondsToTimer();
+                    }
                     registered = that.currentPositionRegistered;
                     if(registered) {
                         registered[1][0].innerHTML = that.currentPosition;
