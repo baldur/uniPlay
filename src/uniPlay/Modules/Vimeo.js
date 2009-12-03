@@ -3,7 +3,7 @@ UniPlay.Modules.Vimeo = function() {
         var height = 240;
         var getDom = function(){ return $("#asset_container")[0] }
         var domContainer = "asset_container";
-        var location = 'http://www.vimeo.com/moogaloop.swf';
+        var swfPath = 'http://www.vimeo.com/moogaloop.swf';
         var videoId;
         return {
             load: function(doc){
@@ -23,7 +23,7 @@ UniPlay.Modules.Vimeo = function() {
                      },
                      attributes: { }
                 }
-                swfobject.embedSWF(location, domContainer, width, height, "9.0.98", "expressInstall.swf", 
+                swfobject.embedSWF(swfPath, domContainer, width, height, "9.0.98", "expressInstall.swf", 
                                      opts.flashvars, opts.params, opts.attributes);
 
             },

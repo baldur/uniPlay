@@ -3,7 +3,7 @@ UniPlay.Modules.JWPlayer = function() {
         var height = 240;
         var getDom = function(){ return $("#player")[0] }
         var domContainer = "asset_container";
-        var location = 'http://localhost/swf/player.swf';
+        var swfPath = 'http://localhost/swf/player.swf';
         var videoId;
         return {
             load: function(doc){
@@ -19,7 +19,7 @@ UniPlay.Modules.JWPlayer = function() {
                      attributes: { id:"player",  
                                    name:"player"}
                 }
-                swfobject.embedSWF(location, domContainer, width, height, "9.0.98", "expressInstall.swf", 
+                swfobject.embedSWF(swfPath, domContainer, width, height, "9.0.98", "expressInstall.swf", 
                                      opts.flashvars, opts.params, opts.attributes);
                 try {var myReady = playerReady} catch (err){};
                    playerReady = function(obj) {

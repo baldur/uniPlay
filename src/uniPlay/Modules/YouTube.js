@@ -3,7 +3,7 @@ UniPlay.Modules.YouTube = function() {
         var height = 240;
         var getDom = function(){ return $("#asset_container")[0] }
         var domContainer = "asset_container";
-        var location = 'http://www.youtube.com/apiplayer?enablejsapi=1&playerapiid=ytplayer';
+        var swfPath = 'http://www.youtube.com/apiplayer?enablejsapi=1&playerapiid=ytplayer';
         var videoId;
         return {
             load: function(doc){
@@ -21,7 +21,7 @@ UniPlay.Modules.YouTube = function() {
                      attributes: { id: domContainer }
                 }
 
-                swfobject.embedSWF(location, domContainer, width, height, "9.0.98", "expressInstall.swf", 
+                swfobject.embedSWF(swfPath, domContainer, width, height, "9.0.98", "expressInstall.swf", 
                                      opts.flashvars, opts.params, opts.attributes);
                 
 
