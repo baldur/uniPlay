@@ -31,6 +31,16 @@ Screw.Unit(function() {
         });
     });
     describe("UniPlay Number extentions", function() {
+        describe("floating correctly", function(){
+            it("should round correctly", function() {
+                var digit = 8.111;
+                expect(digit.zeroPad()).to(equal, "08");
+            });
+            it("should round correctly", function(){
+                var digit = 18.111;
+                expect(digit.zeroPad()).to(equal, "18");
+            });
+        });
         describe("zero padding digits", function() {
             it("should zeropad digits less than 10", function(){
                 var digit = 8;

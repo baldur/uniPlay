@@ -23,7 +23,7 @@ UniPlay.Player = (function(){
 })();
 
 Number.prototype.zeroPad = function(){
-    var myNumber = this
+    var myNumber = parseInt(this, 10);
     if(myNumber < 10) {
         myNumber = "0" + myNumber;
     }
