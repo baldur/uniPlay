@@ -71,7 +71,11 @@ UniPlay.Modules.YouTube = function() {
             timeMonitor: function() { 
                 var that = this;
                 this.timeMonitorId = setInterval( function() { 
-                    that.currentPosition = getDom().getCurrentTime(); 
+                    var currentTime = getDom().getCurrentTime()
+                    if(currentTime < 0) {
+                        currentTime = 0;
+                    }
+                    that.currentPosition = currentTime; 
                     timer = that.timerRegistered;
                     if(timer) {
                         timer[1][0].innerHTML = that.currentPosition.secondsToTimer();
