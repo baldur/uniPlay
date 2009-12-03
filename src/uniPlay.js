@@ -5,7 +5,6 @@ UniPlay.Helpers = {};
 UniPlay.Player = (function(){
     var instance;
     return {
-        name: "playerInstance",
         init: function(doc) {
             console.log("loading " + doc.player + " player");
             instance = UniPlay.Modules[doc.player]();
@@ -13,6 +12,10 @@ UniPlay.Player = (function(){
             instance.register = function(attribute, domEl){
                 this[attribute+"Registered"] = [true, domEl];
             }
+            // UniPlay.playerInstance is a referance here which 
+            // I can rely on internally and/for telling flash 
+            // what it should use for callback
+            UniPlay.playerInstance = instance;
             return instance;
         }
     }

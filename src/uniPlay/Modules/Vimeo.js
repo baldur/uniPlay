@@ -18,7 +18,7 @@ UniPlay.Modules.Vimeo = function() {
                                    show_byline: 0,
                                    show_title: 0,
                                    js_api: 1,
-                                   js_onLoad: "UniPlay." + UniPlay.Player.name + ".player_loaded",
+                                   js_onLoad: "UniPlay.playerInstance.player_loaded",
                                    js_swf_id: domContainer 
                      },
                      attributes: { }
@@ -28,9 +28,9 @@ UniPlay.Modules.Vimeo = function() {
 
             },
             player_loaded: function() {
-                getDom().api_addEventListener('onProgress', "UniPlay."+ UniPlay.Player.name +".timeMonitor");
-                getDom().api_addEventListener('onPlay',"UniPlay."+ UniPlay.Player.name +".onPlay");
-                getDom().api_addEventListener('onPause',"UniPlay."+ UniPlay.Player.name +".onPause");
+                getDom().api_addEventListener('onProgress', "UniPlay.playerInstance.timeMonitor");
+                getDom().api_addEventListener('onPlay',"UniPlay.playerInstance.onPlay");
+                getDom().api_addEventListener('onPause',"UniPlay.playerInstance.onPause");
             },
             onPlay: function() {
                 console.log("play");
@@ -49,7 +49,6 @@ UniPlay.Modules.Vimeo = function() {
                 }
             },
             play: function() {
-                console.log("baldur");
                 console.log(this.currentState);
                 switch(this.currentState) {
                     case "PLAYING":

@@ -8,8 +8,8 @@ UniPlay.Modules.YouTube = function() {
         return {
             load: function(doc){
                 window.onYouTubePlayerReady = function(){ 
-                    UniPlay[UniPlay.Player.name].player_loaded(doc.video_id);
-                    UniPlay[UniPlay.Player.name].timeMonitor();
+                    UniPlay.playerInstance.player_loaded(doc.video_id);
+                    UniPlay.playerInstance.timeMonitor();
                 } 
                   
                 videoId = doc._id;
@@ -27,9 +27,8 @@ UniPlay.Modules.YouTube = function() {
 
             },
             player_loaded: function(id) {
-                console.log("player loaded");
                 getDom().cueVideoById(id, 0);
-                getDom().addEventListener("onStateChange", "UniPlay."+UniPlay.Player.name+".onStateChange");
+                getDom().addEventListener("onStateChange", "UniPlay.playerInstance.onStateChange");
             },
             onStateChange: function (state) {
                 // key unstarted (-1), ended (0), playing (1), paused (2), buffering (3), video cued (5)
@@ -60,7 +59,7 @@ UniPlay.Modules.YouTube = function() {
             currentPosition: '',
             currentState: '',
             unload: function(){
-                console.log("Let's clean up the mess");
+                console.log(this);
                 window.onYouTubePlayerReady = undefined;
                 clearInterval(this.timeMonitorId);
                 $(getDom()).parent().empty().append($('<div id="asset_container">'))
@@ -80,3 +79,4 @@ UniPlay.Modules.YouTube = function() {
             currentVideoId: function() {return videoId},
         }
 };
+

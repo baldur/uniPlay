@@ -7,9 +7,9 @@ UniPlay.Modules.JWPlayer = function() {
         var videoId;
         return {
             load: function(doc){
-                console.log("module");
                 videoId = doc._id;
                 var video_path = "http://localhost/" + doc.video_id;
+                console.log(video_path);
                 var opts = { 
                      params:     { movie: video_path,
                                    allowfullscreen: true, 
@@ -23,8 +23,8 @@ UniPlay.Modules.JWPlayer = function() {
                                      opts.flashvars, opts.params, opts.attributes);
                 try {var myReady = playerReady} catch (err){};
                    playerReady = function(obj) {
-                       getDom().addModelListener("TIME", "UniPlay."+ UniPlay.Player.name +".timeMonitor");
-                       getDom().addModelListener("STATE", "UniPlay."+ UniPlay.Player.name +".stateTracker");
+                       getDom().addModelListener("TIME", "UniPlay.playerInstance.timeMonitor");
+                       getDom().addModelListener("STATE", "UniPlay.playerInstance.stateTracker");
                 try { myReady(obj); } catch (err){};
                    }
             },
@@ -66,3 +66,4 @@ UniPlay.Modules.JWPlayer = function() {
             currentVideoId: function() {return videoId}
         }
 };
+
