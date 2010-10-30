@@ -20,7 +20,7 @@ UniPlay.Modules.JWPlayer = function() {
                                    allowfullscreen: true, 
                                    allowscriptaccess: "always"},
                      flashvars:  { file: video_path,
-                                   image: ""},
+                                   image: doc.image},
                      attributes: { id:"player",  
                                    name:"player"}
                 }
