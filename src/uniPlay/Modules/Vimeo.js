@@ -23,7 +23,7 @@ UniPlay.Modules.Vimeo = function() {
                      },
                      attributes: { }
                 }
-                swfobject.embedSWF(swfPath, domContainer, width, height, "9.0.98", "expressInstall.swf", 
+                swfobject.embedSWF(swfPath, domContainer, (doc.width || width), (doc.height || height), "9.0.98", "expressInstall.swf", 
                                      opts.flashvars, opts.params, opts.attributes);
 
             },
