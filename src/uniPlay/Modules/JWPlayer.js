@@ -1,12 +1,14 @@
 UniPlay.Modules.JWPlayer = function() {
         var width = 360;
         var height = 240;
-        var getDom = function(){ return $("#player")[0] }
-        var domContainer = "asset_container";
+        var getDom; /*= function(){ return $("#player")[0] } */
+        var domContainer; /* = "asset_container"; */
         var swfPath = 'http://127.0.0.1:4567/swf/player.swf';
         var videoId;
         return {
-            load: function(doc){
+            load: function(doc, domEl){
+                domContainer = domEl.attr('id');
+                getDom = function() { return domEl };
                 videoId = doc._id;
                 var video_path;
                 if( doc.url ) {

@@ -12,9 +12,8 @@
           <a href='#youtube'  class='examples youtube'>YouTube</a>
           <a href='#jwplayer' class='examples jwplayer'>JWPlayer</a>
       </div>
-    <div id="wrapper">
-        <div id="asset_container"></div>
-    </div>
+    <div id="player"></div>
+
     <div id="play">Play</div>
     <hr />
     <ul>
@@ -22,6 +21,7 @@
         <li>current postion: <span id="currentPosition"></span></lid>
         <li>current state: <span id="currentState"></span></lid>
     </ul>
+
   </body>
   <!--[if IE]>
     <script src="/javascripts/firebug-lite-compressed.js" type="text/javascript"></script>
@@ -59,16 +59,19 @@
 
      }
      $(document).ready(function () {
+
         $('#play').click( function(e) {
             YourScope.yourUniPlayer.play();
         });
+
         $('.examples').click(function(e) {
             //TODO this must die!!
             if(UniPlay.playerInstance) {
                 UniPlay.playerInstance.unload();
             }   
             var attr = $(e.target).attr('class').split(' ');
-            YourScope.yourUniPlayer = UniPlay.Player.init(YourScope[attr[0]][attr[1]]);
+            console.log(YourScope[attr[0]][attr[1]]);
+            YourScope.yourUniPlayer = $('#player').embedUniPlayer(YourScope[attr[0]][attr[1]]);
             YourScope.yourUniPlayer.register('timer', $('#timer'));
             YourScope.yourUniPlayer.register('currentPosition',$('#currentPosition')); 
             YourScope.yourUniPlayer.register('currentState',$('#currentState')); 

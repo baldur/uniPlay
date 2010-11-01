@@ -1,12 +1,14 @@
 UniPlay.Modules.YouTube = function() {
         var width = 360;
         var height = 240;
-        var getDom = function(){ return $("#asset_container")[0] }
-        var domContainer = "asset_container";
+        var getDom; //= function(){ return $("#asset_container")[0] }
+        var domContainer; // = "asset_container";
         var swfPath = 'http://www.youtube.com/apiplayer?enablejsapi=1&playerapiid=ytplayer';
         var videoId;
         return {
-            load: function(doc){
+            load: function(doc, domEl){
+                domContainer = domEl.find('div').attr('id');
+                getDom = function() { return $('#'+domContainer)[0] };
                 window.onYouTubePlayerReady = function(){ 
                     UniPlay.playerInstance.player_loaded(doc.video_id);
                     UniPlay.playerInstance.timeMonitor();

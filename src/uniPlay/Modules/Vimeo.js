@@ -1,12 +1,15 @@
 UniPlay.Modules.Vimeo = function() {
         var width = 360;
         var height = 240;
-        var getDom = function(){ return $("#asset_container")[0] }
-        var domContainer = "asset_container";
+        var getDom; /* function(){ return $("#asset_container")[0] } */
+        var domContainer;
         var swfPath = 'http://www.vimeo.com/moogaloop.swf';
         var videoId;
         return {
-            load: function(doc){
+            load: function(doc, domEl){
+                console.log("is this la" , domEl);
+                domContainer = domEl.attr('id');
+                getDom = function() { return domEl };
                 console.log("vimeoModule");
                 videoId = doc._id;
                 var opts = { 

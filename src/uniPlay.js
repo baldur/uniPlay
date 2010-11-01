@@ -1,3 +1,26 @@
+(function( $ ){
+
+  $.fn.embedUniPlayer = function( opts ) {  
+
+    return this.each(function() {
+      var $this = $( this );
+      var domEl = $this.html( "<div id='somradmemeddddied'></div>" );
+      UniPlay.Player.init( opts, domEl );
+    });
+
+  };
+
+  $.fn.unload = function( opts ) {
+     //TODO
+     console.log("this needs handling");
+  };
+
+  $.fn.register = function( opts ) {
+     //TODO
+     console.log("this needs handling");
+  };
+})( jQuery );
+
 UniPlay = {};
 UniPlay.Modules = {};
 UniPlay.Helpers = {};
@@ -5,10 +28,12 @@ UniPlay.Helpers = {};
 UniPlay.Player = (function(){
     var instance;
     return {
-        init: function(doc) {
+        init: function( doc, domEl ) {
+            domEl.attr('id', 'somethingrandom');
             console.log("loading " + doc.player + " player");
             instance = UniPlay.Modules[doc.player]();
-            instance.load(doc);
+            instance.foo = "really";
+            instance.load(doc, domEl);
             instance.register = function(attribute, domEl){
                 if(!this.registry) {
                     this.registry = [];
