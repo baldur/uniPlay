@@ -1,24 +1,51 @@
 (function( $ ){
 
-  $.fn.embedUniPlayer = function( opts ) {  
+  var methods = {
+    embed : function( opts ) {  
+      console.log( 'embedding' );
+      return this.each(function() {
+        var $this = $( this );
+        $this.uniPlayer( 'unload' );
+        var randomEnoughId = randomEnoughIdString();
+        var domEl = $this.append( "<div id='"+randomEnoughId+"'></div>" );
+        window.UniPlayerInstance = UniPlay.Player.init( opts, $("#"+randomEnoughId) );
+      });
+    },
+    unload : function( opts ) {
+      console.log( 'attempting unload' );
+      if(window.UniPlayerInstance) {
+          console.log( 'attempting unload on instance before' );
+          // this clears Interval etc for youtube
+          //window.UniPlayerInstance.unload();
+          console.log( 'attempting unload on instance after' );
+      }
+          window.UniPlayerInstance = undefined;
+          $( this ).empty();
+    },
+    register : function( opts ) {
+      console.log("registering needs implementing");
+    } 
+  }; 
 
-    return this.each(function() {
-      var $this = $( this );
-      var domEl = $this.html( "<div id='somradmemeddddied'></div>" );
-      UniPlay.Player.init( opts, domEl );
-    });
+  function randomEnoughIdString() {
+    var randomString = [];
+    for(var i = 0; i < 5; i++){
+      randomString.push(String.fromCharCode(Math.floor((Math.random()*100) % (90 - 65 + 1) + 65)));
+      randomString.push(String.fromCharCode(Math.floor((Math.random()*100) % (122 - 97 + 1) + 97)));
+    }
+    return randomString.join("");
+  }
 
+  $.fn.uniPlayer = function( method ) {
+    if ( methods[method] ) {
+      return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    } else if ( typeof method === 'object' || ! method ) {
+      return methods.embed.apply( this, arguments );
+    } else {
+      $.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
+    }    
   };
 
-  $.fn.unload = function( opts ) {
-     //TODO
-     console.log("this needs handling");
-  };
-
-  $.fn.register = function( opts ) {
-     //TODO
-     console.log("this needs handling");
-  };
 })( jQuery );
 
 UniPlay = {};

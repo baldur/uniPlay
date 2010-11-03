@@ -67,20 +67,20 @@
         $('.examples').click(function(e) {
             //TODO this must die!!
             if(UniPlay.playerInstance) {
-                UniPlay.playerInstance.unload();
+                // old UniPlay.playerInstance.unload();
+                $('#player').uniPlayer('unload');
             }   
             var attr = $(e.target).attr('class').split(' ');
             console.log(YourScope[attr[0]][attr[1]]);
-            YourScope.yourUniPlayer = $('#player').embedUniPlayer(YourScope[attr[0]][attr[1]]);
-            YourScope.yourUniPlayer.register('timer', $('#timer'));
-            YourScope.yourUniPlayer.register('currentPosition',$('#currentPosition')); 
-            YourScope.yourUniPlayer.register('currentState',$('#currentState')); 
+            $('#player').uniPlayer(YourScope[attr[0]][attr[1]]);
+            $('#player').uniPlayer('register', {'timer': $('#timer')});
+            $('#player').uniPlayer('register', {'currentPosition' : $('#currentPosition')}); 
+            $('#player').uniPlayer('register', {'currentState' : $('#currentState')}); 
         });
 
         // initialize if something was selected
         var picked = location.hash;
         if(picked) {
-            console.log(picked);
             $('.'+picked.substring(1,picked.length)+':first').trigger('click');
         } else {
             $('.examples:first').trigger('click');

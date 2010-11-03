@@ -7,7 +7,7 @@ UniPlay.Modules.YouTube = function() {
         var videoId;
         return {
             load: function(doc, domEl){
-                domContainer = domEl.find('div').attr('id');
+                domContainer = domEl.attr('id');
                 getDom = function() { return $('#'+domContainer)[0] };
                 window.onYouTubePlayerReady = function(){ 
                     UniPlay.playerInstance.player_loaded(doc.video_id);

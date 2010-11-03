@@ -7,7 +7,6 @@ UniPlay.Modules.Vimeo = function() {
         var videoId;
         return {
             load: function(doc, domEl){
-                console.log("is this la" , domEl);
                 domContainer = domEl.attr('id');
                 getDom = function() { return domEl };
                 console.log("vimeoModule");
