@@ -56,7 +56,6 @@ UniPlay.Player = (function(){
     var instance;
     return {
         init: function( doc, domEl ) {
-            domEl.attr('id', 'somethingrandom');
             console.log("loading " + doc.player + " player");
             instance = UniPlay.Modules[doc.player]();
             instance.foo = "really";

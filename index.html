@@ -13,7 +13,6 @@
           <a href='#jwplayer' class='examples jwplayer'>JWPlayer</a>
       </div>
     <div id="player"></div>
-
     <div id="play">Play</div>
     <hr />
     <ul>
@@ -21,6 +20,14 @@
         <li>current postion: <span id="currentPosition"></span></lid>
         <li>current state: <span id="currentState"></span></lid>
     </ul>
+
+    <!-- multiple players here we go -->
+    <div id="player_1"></div>
+    <hr />
+    <div id="player_2"></div>
+    <hr />
+    <div id="player_3"></div>
+    <hr />
 
   </body>
   <!--[if IE]>
@@ -38,14 +45,14 @@
        vimeo :  { 
                  "video_id": "14533805",
                  "player": "Vimeo",
-                 "width" : 720,
-                 "height" : 480
+                 "width" : 180,
+                 "height" : 120
                 },
        youtube : { 
                  "video_id": "OQSNhk5ICTI",
                  "player": "YouTube",
-                 "width" : 720,
-                 "height" : 480
+                 "width" : 180,
+                 "height" : 120
                 },
        /* this is for if you have something hosted on your own*/
        jwplayer : {
@@ -53,12 +60,20 @@
                  "video_id": "video_two.mp4",
                  "player": "JWPlayer",
                  "image" : "https://s3.amazonaws.com/snitchmedia-nostalgia-transcoded/thumbnail.png",
-                 "width" : 720,
-                 "height" : 480
+                 "width" : 180,
+                 "height" : 120
                 }
 
      }
      $(document).ready(function () {
+        $('#player_1').uniPlayer(YourScope.examples.vimeo);
+        // LOOKING like we'll only see one youtube for now
+        opts = {"video_id" : "ksThvPT_V5A",
+                 "player": "YouTube",
+                 "width" : 180,
+                 "height" : 120}
+        $('#player_2').uniPlayer(opts);
+        $('#player_3').uniPlayer(YourScope.examples.jwplayer);
 
         $('#play').click( function(e) {
             YourScope.yourUniPlayer.play();
@@ -71,7 +86,6 @@
                 $('#player').uniPlayer('unload');
             }   
             var attr = $(e.target).attr('class').split(' ');
-            console.log(YourScope[attr[0]][attr[1]]);
             $('#player').uniPlayer(YourScope[attr[0]][attr[1]]);
             $('#player').uniPlayer('register', {'timer': $('#timer')});
             $('#player').uniPlayer('register', {'currentPosition' : $('#currentPosition')}); 
